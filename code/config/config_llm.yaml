@@ -1,4 +1,4 @@
-preferred_endpoint: azure_openai
+preferred_endpoint: openai
 
 endpoints:
   inception:
@@ -10,7 +10,7 @@ endpoints:
       low: mercury-small
 
   openai:
-    api_key_env: OPENAI_API_KEY
+    api_key_env: OPENAI_API_RUNNER_KEY
     api_endpoint_env: OPENAI_ENDPOINT
     llm_type: openai
     models:

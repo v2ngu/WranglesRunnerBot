@@ -1,8 +1,8 @@
-preferred_provider: azure_openai
+preferred_provider: openai
 
 providers:
   openai:
-    api_key_env: OPENAI_API_KEY
+    api_key_env: OPENAI_API_RUNNER_KEY
     api_endpoint_env: OPENAI_ENDPOINT
     model: text-embedding-3-small
 

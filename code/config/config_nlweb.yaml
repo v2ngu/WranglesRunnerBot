@@ -4,7 +4,7 @@
 # Comma-separated list of allowed sites, if you have multiple sites
 # in your store and want to restrict search to some sites. Defaults 
 # to all, for now.
-#sites: "yoursite"
+sites: Wrangles
 
 # Data folders for JSON files and embeddings
 data_folders:
