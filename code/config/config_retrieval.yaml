@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 preferred_endpoint: qdrant_local 
-=======
-preferred_endpoint: nlweb_west
->>>>>>> upstream/main
 
 endpoints:
   nlweb_west:
