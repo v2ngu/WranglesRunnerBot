@@ -261,8 +261,9 @@
         
         The user's query: {request.query}
         The details requested: {request.details_requested}
-        
-        From the following item description, extract ONLY the specific details the user is asking for.
+        From the following item description, extract the FULL content of the tutorial.
+        Format the response clearly as a helpful, step-by-step guide. 
+        Use headings, bullet points, and code examples if they exist in the original text to make it easy to read.
         Be comprehensive but focused - include all relevant information for what they asked, but don't include unrelated details.
         
         For example:
