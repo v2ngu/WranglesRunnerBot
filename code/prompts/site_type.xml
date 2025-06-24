@@ -123,6 +123,7 @@
         details of a particular {site.itemType}?
         If the user for the details of a particular {site.itemType}, what is the name of the {site.itemType} and what
         details are they asking for? The user's query is: {request.query}.
+        More often or not in the Wrangles context they are asking about the details of a particular Wrangle. Then item_details_query is TRUE.
       </promptString>
       <returnStruc>
         {
