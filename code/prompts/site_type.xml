@@ -117,17 +117,22 @@
 
     <Prompt ref="DetectQueryTypePrompt">
       <promptString>
-        Analyze the following query from the user. 
-        Is the user asking for a list of {site.itemType} that match a certain description or are they asking for the
-        details of a particular {site.itemType}?
-        If the user for the details of a particular {site.itemType}, what is the name of the {site.itemType} and what
-        details are they asking for? The user's query is: {request.query}.
-        More often or not in the Wrangles context they are asking about the details of a particular Wrangle. Then item_details_query is TRUE.
+        You are an expert at analyzing user queries for the Wrangles documentation site. Your goal is to determine if the user is asking for a list of tutorials or for the details of ONE specific tutorial.
+
+        1.  **Analyze the query**: Read the user's query carefully. Queries like "How can I use..." or "Tell me about..." are usually about one specific item.
+        2.  **Set Mode**: If the query is about one specific item, set "item_details_query" to "True". Otherwise, set it to "False".
+        3.  **EXTRACT TITLE**: This is the most important step. If "item_details_query" is "True", you MUST extract the name of the Wrangle or tutorial from the query and put it in the "item_title" field.
+
+        **Example:**
+        - User's query: "How can I use the address extract?"
+        - Extracted "item_title": "address extract"
+
+        The User's Query: "{request.query}"
       </promptString>
       <returnStruc>
         {
           "item_details_query": "True or False",
-          <!-- "item_title": "The title of the item type, if any", -->
+          "item_title": "The title of the item type, if any",
           "details_being_asked": "what details the user is asking for"
         }
       </returnStruc>
@@ -268,10 +273,11 @@
         Use headings, bullet points, and code examples if they exist in the original text to make it easy to read.
         Be comprehensive but focused - include all relevant information for what they asked, but don't include unrelated details.
         
+        In addition to the basic steps, provide a "Use Case" or "Why is this useful?" section that explains a real-world scenario where this Wrangle would be valuable.
+
         For example:
         - If they ask for "code", include the full code snippet or example
         - If they ask for "options", include all available options or variations
-        
         
         Item description: {item.description}
       </promptString>
@@ -287,11 +293,15 @@
 
     <Prompt ref="FindItemPrompt"> 
       <promptString>
-        The user is looking for for an item named / described as: {item.name}
-        Assign a score between 0 and 100 for whether the following item description
-        matches the items the user is looking for. A score of 100 means this is exactly
-        the item they want, 0 means it's completely unrelated.
+        Your goal is to find a tutorial in the Wrangles documentation.
+        The user is looking for an item with the title: "{request.item_title}".
+
+        The name in the documentation might be slightly different (e.g., user asks for "address extract", but the item is named "extract.address" or "Address Extraction"). 
+        
+        Assign a score from 0-100 based on how well the item's description matches the requested title. Score highly if the core concepts match, even if the exact wording differs. A score of 100 means it is a perfect match.
+
         Item description: {item.description}
+
       </promptString>
       <returnStruc>
         {
@@ -548,7 +558,7 @@
 
         And this item:
         Name: {item.name}
-        Type: {item.type}
+        Type: {item.type}s
         Description: {item.description}
 
         Rate how relevant this item is for answering the user's query on a scale of 0-100.
